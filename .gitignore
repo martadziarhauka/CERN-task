@@ -1,0 +1,15 @@
+# Compiled programs
+generate
+analyze
+*.dSYM/
+
+# Large generated data; reproducible with ./generate
+events*.root
+test_*.root
+
+# ROOT and macOS temporary files
+*.d
+*.so
+*.pcm
+*_ACLiC_dict*
+.DS_Store
