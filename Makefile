@@ -7,3 +7,6 @@ ROOT_LIBS = $(shell root-config --libs)
 
 generate: generate.cc
 	$(CXX) $(CXXFLAGS) $(ROOT_CFLAGS) -I$(PYTHIA_INCLUDE) generate.cc -o generate $(ROOT_LIBS) $(PYTHIA_LIBS)
+
+analyze: analyze.cc
+	$(CXX) $(CXXFLAGS) $(ROOT_CFLAGS) analyze.cc -o analyze $(ROOT_LIBS)
