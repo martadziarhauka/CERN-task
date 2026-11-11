@@ -65,7 +65,7 @@ int main() {
     // The same index c refers to the same category in all lists below.
     const std::vector<std::string> categories = {"all", "ch", "pip", "pim", "Kp", "Km", "p", "pbar"};
     const std::vector<std::string> labels = {"all particles", "charged particles",
-                                             "#pi^{+}", "#pi^{-}", "K^{+}", "K^{-}", "p", "#bar{p}"};
+                                             "#pi^{+}", "#pi^{#minus}", "K^{+}", "K^{#minus}", "p", "#bar{p}"};
                             
     std::vector<TH1D*> hN, hPt, hEta, hPhi;
 
