@@ -102,6 +102,24 @@ void draw_plots(){
 
         }
     }
+
+    // Print a summary table: mean multiplicity <N> and mean pT for each category.
+    // <N> = number of particles / number of events, because hN_all and hN_ch
+    // have events with N > 400 in the overflow bin, which GetMean() does not use.
+    TH1D* hNall = inputFile.Get<TH1D>("hN_all");
+    if (!hNall) {
+        std::cerr << "Histogram hN_all not found" << std::endl;
+        return;
+    }
+    double nEvents = hNall->GetEntries();
+
+    std::cout << std::endl << "Category      <N>  <pT> [GeV]" << std::endl;
+    for (size_t c = 0; c < categories.size(); c++) {
+        TH1D* hPt = inputFile.Get<TH1D>(("hPt_" + categories[c]).c_str());
+        if (!hPt) continue;
+        double meanN = hPt->GetEntries() / nEvents;
+        printf("%-8s %8.2f %10.3f\n", categories[c].c_str(), meanN, hPt->GetMean());
+    }
 }
 
 
