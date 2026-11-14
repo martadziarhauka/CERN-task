@@ -60,7 +60,7 @@ so the full entry has 49 values in each column):
 Run all commands in the project folder.
 
 ```bash
-make generate analyze           # 1. build the programs
+make                            # 1. build the programs
 ./generate                      # 2. generate events  -> events.root   (~3 min)
 ./analyze                       # 3. fill histograms  -> analysis.root (~15 s)
 root -l -b -q draw_plots.C      # 4. draw plots       -> plots/*.png, plots/*.pdf
@@ -68,7 +68,7 @@ root -l -b -q draw_plots.C      # 4. draw plots       -> plots/*.png, plots/*.pd
 
 | Step | Command | Output | Time |
 |---|---|---|---|
-| 1 | `make generate analyze` | programs `generate` and `analyze` | a few seconds |
+| 1 | `make` | programs `generate` and `analyze` | a few seconds |
 | 2 | `./generate` | `events.root` (100 000 events, ~238 MB) | ~3 min |
 | 3 | `./analyze` | `analysis.root` (32 histograms) | ~15 s |
 | 4 | `root -l -b -q draw_plots.C` | `plots/`: 32 PNG + 32 PDF; table of mean N and mean pT in the terminal | a few seconds |
@@ -88,7 +88,7 @@ root -l -b -q draw_plots.C      # 4. draw plots       -> plots/*.png, plots/*.pd
   outside the range. The φ distribution is flat, so this does not change its shape.
 - **Multiplicity N:** filled once per event for each category, also when the category has no particles in the event (N = 0).
 - **Reproducibility:** fixed random seed (`Random:seed = 12345`). Running the chain again gives
-  the same events and the same histograms (checked: all 32 histograms are identical bin by bin).
+  the same events and the same histograms.
 
 ### Particle categories
 
@@ -104,10 +104,10 @@ The short names are used in the histogram names, e.g. `hPt_pip` is pT of π⁺.
 
 ## Notes
 
-- **N > 400:** in `hN_all` about 13% of the events (12 690 of 100 000) have more than 400 particles
-  and go to the overflow bin (80 events in `hN_ch`). The range 0–400 is fixed by the task.
-  Because of this, `GetMean()` of `hN_all` gives 144.5, while the true mean is 192.7 particles per event.
-- **|η| > 5:** about 26% of all particles fly almost along the beam and are outside the range −5…5
+- **N > 400:** in `hN_all` (and a few events in `hN_ch`) some events have more than 400 particles
+  and go to the overflow bin. The range 0–400 is fixed by the task. `GetMean()` does not use the
+  overflow bin, so `draw_plots.C` computes the mean N as (number of particles) / (number of events).
+- **|η| > 5:** some particles fly almost along the beam and are outside the range −5…5
   of the `hEta_*` histograms (underflow/overflow).
 - **Even number of charged particles:** the number of charged particles in an event is always even
   (charge is conserved: the two protons give +2). So all bins with odd N in `hN_ch` are empty,

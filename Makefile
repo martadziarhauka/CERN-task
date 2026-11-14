@@ -5,8 +5,16 @@ PYTHIA_LIBS = $(shell pythia8-config --libs)
 ROOT_CFLAGS = $(filter-out -std=%,$(shell root-config --cflags))
 ROOT_LIBS = $(shell root-config --libs)
 
+all: generate analyze
+
 generate: generate.cc
 	$(CXX) $(CXXFLAGS) $(ROOT_CFLAGS) -I$(PYTHIA_INCLUDE) generate.cc -o generate $(ROOT_LIBS) $(PYTHIA_LIBS)
 
 analyze: analyze.cc
 	$(CXX) $(CXXFLAGS) $(ROOT_CFLAGS) analyze.cc -o analyze $(ROOT_LIBS)
+
+
+clean:
+	rm -f generate analyze
+
+.PHONY: all clean
