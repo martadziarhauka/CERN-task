@@ -50,8 +50,8 @@ so the full entry has 49 values in each column):
 | 2212 (p) | 3 | 0.278 | 10.80 | −0.99 |
 | 321 (K⁺) | 3 | 0.109 | −8.51 | 0.15 |
 | −321 (K⁻) | −3 | 0.448 | −6.93 | 1.26 |
+| −321 (K⁻) | −3 | 0.328 | −5.74 | −0.20 |
 | 211 (π⁺) | 3 | 0.307 | −4.47 | 1.08 |
-| 22 (γ) | 0 | 0.476 | −4.51 | −0.75 |
 
 `pdg` is the PDG particle code, `chargeType` is 3 × the electric charge.
 
